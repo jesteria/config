@@ -1,0 +1,27 @@
+[extensions]
+color = 
+graphlog = 
+fetch = 
+purge=
+mq=
+pager=
+progress=
+mercurial_keyring=
+
+[alias]
+latest = log --limit 5
+
+[ui]
+username = Jesse London
+ignore = ~/.hgignore
+
+[auth]
+analyte.prefix = analyte.kilnhg.com
+analyte.username = jesse.london@analytemedia.com
+
+[diff]
+git=True
+
+[pager]
+attend = diff
+pager = LESS='FSRX' less
