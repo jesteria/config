@@ -1,3 +1,9 @@
 [submodule "vim/.vim/bundle/ag"]
 	path = vim/.vim/bundle/ag
 	url = https://github.com/rking/ag.vim
+[submodule "vim/.vim/bundle/ctrlp.vim"]
+	path = vim/.vim/bundle/ctrlp.vim
+	url = https://github.com/kien/ctrlp.vim.git
+[submodule "vim/.vim/bundle/python-mode"]
+	path = vim/.vim/bundle/python-mode
+	url = git://github.com/klen/python-mode.git
