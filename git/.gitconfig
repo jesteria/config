@@ -1,0 +1,8 @@
+[user]
+	email = jesselondon@gmail.com
+	name = Jesse London
+
+[alias]
+	st = status
+	ci = commit
+	d = diff
