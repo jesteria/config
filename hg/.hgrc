@@ -10,6 +10,7 @@ mercurial_keyring=
 
 [alias]
 latest = log --limit 5
+h! = heads .
 
 [ui]
 username = Jesse London
