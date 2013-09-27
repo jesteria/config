@@ -17,6 +17,8 @@ call pathogen#helptags()
 
 filetype plugin indent on
 syntax on
+" avoid syntax highlighting issues:
+syntax sync fromstart
 
 " ctrlp
 set runtimepath^=~/.vim/bundle/ctrlp.vim
@@ -28,6 +30,8 @@ inoremap jk <Esc>
 " map tab switching to something easier
 map <C-h> gT
 map <C-l> gt
+map <C-j> :execute "tabmove" tabpagenr() - 2 <CR>
+map <C-k> :execute "tabmove" tabpagenr() <CR>
 "
 " toggle fold
 function ToggleFold()
@@ -38,6 +42,8 @@ function ToggleFold()
     endif
 endfunction
 map <leader>f :call ToggleFold()<CR>
+
+let NERDTreeIgnore = ['\.pyc$']
 
 " python-mode options
 " TODO: test
