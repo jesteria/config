@@ -6,3 +6,9 @@
 	st = status
 	ci = commit
 	d = diff
+	out = log origin/master..
+	in = log ..origin/master
+	compare = !$(dirname $(readlink $HOME/.gitconfig || echo $HOME/.gitconfig))/gitcompare.bash $1
+
+[color]
+	ui = true
