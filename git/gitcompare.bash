@@ -11,10 +11,18 @@ function commits() {
     printf "$2\n\n"
 }
 
-echo -e "compare $1\n"
+if [ -z "$1" ]
+then
+    ref=$(git symbolic-ref HEAD)
+    ref=origin/${ref##refs/heads/}
+else
+    ref="$1"
+fi
 
-incoming=$(git log ..$1)
-outgoing=$(git log $1..)
+echo -e "compare $ref\n"
+
+incoming=$(git log ..$ref)
+outgoing=$(git log $ref..)
 
 commits incoming "$incoming"
 [[ "$incoming" || "$outgoing" ]] && echo ""
