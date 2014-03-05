@@ -51,3 +51,7 @@ let g:pymode_breakpoint_key = '<leader>q'
 let g:pymode_breakpoint_cmd = "import ipdb; ipdb.set_trace() ### XXX BREAKPOINT"
 let g:pymode_lint_ignore = 'E261,E127,E128,E501'
 let g:pymode_rope_always_show_complete_menu = 1
+
+" JavaScript & HTML
+autocmd FileType html setlocal expandtab shiftwidth=4 tabstop=4
+autocmd FileType js setlocal expandtab shiftwidth=4 tabstop=4
