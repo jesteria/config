@@ -51,3 +51,17 @@ let g:pymode_breakpoint_key = '<leader>q'
 let g:pymode_breakpoint_cmd = "import ipdb; ipdb.set_trace() ### XXX BREAKPOINT"
 let g:pymode_lint_ignore = 'E261,E127,E128,E501'
 let g:pymode_rope_always_show_complete_menu = 1
+
+" Qargs
+" Populate argument list with all files in the quickfix list
+" Ex.
+"     :Qargs | argdo %s/findme/replacement/gc | update
+command! -nargs=0 -bar Qargs execute 'args ' . QuickfixFilenames()
+function! QuickfixFilenames()
+  " Building a hash ensures we get each buffer only once
+  let buffer_numbers = {}
+  for quickfix_item in getqflist()
+    let buffer_numbers[quickfix_item['bufnr']] = bufname(quickfix_item['bufnr'])
+  endfor
+  return join(values(buffer_numbers))
+endfunction
