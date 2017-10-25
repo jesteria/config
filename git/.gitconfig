@@ -11,7 +11,7 @@
 	d = diff
 	out = log origin/master..
 	in = log ..origin/master
-	cm = !sh -c '$(dirname $(readlink $HOME/.gitconfig || echo $HOME/.gitconfig))/gitcompare.bash "$@"' -
+	cm = !sh -c 'gitcompare.bash "$@"' -
 	oldest-ancestor = !bash -c 'diff --old-line-format='' --new-line-format='' <(git rev-list --first-parent "${1:-master}") <(git rev-list --first-parent "${2:-HEAD}") | head -1' -
 
 [color]
