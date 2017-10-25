@@ -52,9 +52,9 @@ if [ -n "$force_color_prompt" ]; then
 fi
 
 if [ "$color_prompt" = yes ]; then
-    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\] \[\033[01;34m\]\w\[\033[00m\]\$ '
 else
-    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
+    PS1='${debian_chroot:+($debian_chroot)}\u@\h \w\$ '
 fi
 unset color_prompt force_color_prompt
 
@@ -80,8 +80,8 @@ if [ -x /usr/bin/dircolors ]; then
 fi
 
 # some more ls aliases
-alias ll='ls -alF'
-alias la='ls -A'
+alias ll='ls -ahlF'
+alias la='ls -ACF'
 alias l='ls -CF'
 
 # Alias definitions.
@@ -101,3 +101,14 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
 fi
 
 [ -n "$TMUX" ] && TERM=screen-256color-bce
+
+# Functions
+function joinparam {
+    # $1 is sep
+    # $2... are the elements to join
+    local sep=$1 ret=$2
+    shift 2 || shift $(($#))
+    printf "%s" "$ret${@/#/$sep}"
+}
+
+export PATH="${PATH}:$(dirname $(dirname $(readlink "${BASH_SOURCE[0]}")))/git/bin"

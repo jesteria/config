@@ -21,8 +21,8 @@ fi
 
 echo -e "compare $ref\n"
 
-incoming=$(git log ..$ref)
-outgoing=$(git log $ref..)
+incoming=$(git log $2..$ref)
+outgoing=$(git log $ref..$2)
 
 commits incoming "$incoming"
 [[ "$incoming" || "$outgoing" ]] && echo ""
