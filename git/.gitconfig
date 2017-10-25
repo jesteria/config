@@ -18,7 +18,7 @@
 	ui = true
 [core]
 	editor = /usr/bin/vim
-	excludesfile = /Users/jester/.gitignore
+	excludesFile = ~/.gitignore
 [tag]
 	sort = version:refname
 [push]
