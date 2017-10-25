@@ -6,7 +6,7 @@ purge=
 mq=
 pager=
 progress=
-mercurial_keyring=
+# mercurial_keyring=
 
 [alias]
 latest = log --limit 5
