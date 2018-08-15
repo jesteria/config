@@ -7,12 +7,13 @@
 	ci = commit
 	co = checkout
 	br = branch
+	ca = commit -a
 	cb = "!git rev-parse --abbrev-ref HEAD"
 	d = diff
 	out = log origin/master..
 	in = log ..origin/master
 	cm = !sh -c 'gitcompare.bash "$@"' -
-	oldest-ancestor = !bash -c 'diff --old-line-format='' --new-line-format='' <(git rev-list --first-parent "${1:-master}") <(git rev-list --first-parent "${2:-HEAD}") | head -1' -
+	# oldest-ancestor = !bash -c 'diff --old-line-format='' --new-line-format='' <(git rev-list --first-parent "${1:-master}") <(git rev-list --first-parent "${2:-HEAD}") | head -1' -
 
 [color]
 	ui = true
