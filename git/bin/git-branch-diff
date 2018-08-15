@@ -1,0 +1,5 @@
+#!/bin/sh
+
+# . "$(git --exec-path)/git-sh-setup"
+
+git diff "$@" $(git merge-base master HEAD)
