@@ -1,13 +1,16 @@
 #!/usr/bin/env python3
+import argparse
 import pathlib
 
 
+HOME = pathlib.Path.home()
 SOURCE_PATH = pathlib.Path(__file__).resolve()
 ROOT_PATH = SOURCE_PATH.parent
+
 LINKS_FILENAME = 'LINKS'
 
 
-def main(dry_run=True):
+def main(execute=False, force=False):
     print('=== begin ===')
     print('root path:', ROOT_PATH)
     print()
@@ -21,11 +24,31 @@ def main(dry_run=True):
                 with links_node.open() as fd:
                     for spec in fd:
                         (name, *instructions0) = (part.strip() for part in spec.split('|', 1))
+
+                        target = node / name
+                        link_node = HOME / name
                         instructions.extend(instructions0)
-                        if dry_run:
-                            print('would link:', node / name)
+
+                        if execute:
+                            if force:
+                                if link_node.is_dir() and not link_node.is_symlink():
+                                    try:
+                                        link_node.rmdir()
+                                    except OSError:
+                                        print('WARNING: will not replace non-empty directory:', link_node)
+                                elif link_node.exists():
+                                    link_node.unlink()
+
+                            if link_node.exists():
+                                action = 'skipped (exists)'
+                            else:
+                                link_node.symlink_to(target)
+                                action = 'linked'
                         else:
-                            raise NotImplementedError
+                            action = 'dry run'
+
+                        print(f'{action}:', link_node, '→', target)
+
     print()
 
     print('=== instructions ===')
@@ -33,4 +56,16 @@ def main(dry_run=True):
 
 
 if __name__ == '__main__':
-    main()
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        '-f', '--force',
+        action='store_true',
+    )
+    parser.add_argument(
+        '-n', '--dry-run',
+        action='store_false',
+        default=True,
+        dest='execute',
+    )
+    args = parser.parse_args()
+    main(**vars(args))
