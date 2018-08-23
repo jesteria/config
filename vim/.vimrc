@@ -13,7 +13,7 @@ colorscheme railscasts
 filetype off
 
 call pathogen#infect()
-call pathogen#helptags()
+" call pathogen#helptags()
 
 filetype plugin indent on
 syntax on
