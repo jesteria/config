@@ -44,11 +44,11 @@ function contains {
 export EDITOR=vim
 export GPGKEY=29D00FD4
 
-# Tmux TERM
-# Necessary?
-# [ -n "$TMUX" ] && TERM=screen-256color-bce
+true_source=$(readlink -f "${BASH_SOURCE[0]}")
 
-DOTFILES_ROOT=$(dirname $(cd $(dirname "${BASH_SOURCE[0]}") && pwd))
+export DOTFILES_ROOT=$(dirname $(dirname $true_source))
+
+unset true_source
 
 
 #
@@ -66,9 +66,13 @@ source "$DOTFILES_ROOT"/git/path.bash.inc
 #
 
 # pyenv
-export PATH="$HOME/.pyenv/bin:$PATH"
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
+if $(command -v pyenv); then
+  export PATH="$HOME/.pyenv/bin:$PATH"
+  eval "$(pyenv init -)"
+  eval "$(pyenv virtualenv-init -)"
+fi
 
 # direnv
-eval "$(direnv hook bash)"
+if $(command -v direnv); then
+  eval "$(direnv hook bash)"
+fi
