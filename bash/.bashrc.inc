@@ -50,6 +50,10 @@ export DOTFILES_ROOT=$(dirname $(dirname $true_source))
 
 unset true_source
 
+if [[ ! ":$PATH:" =~ :"$HOME"/.local/bin/?: ]]; then
+  export PATH="$HOME/.local/bin:$PATH"
+fi
+
 
 #
 # Includes
@@ -66,7 +70,7 @@ source "$DOTFILES_ROOT"/git/path.bash.inc
 #
 
 # pyenv
-if $(command -v pyenv); then
+if [ -d "$HOME/.pyenv/bin" ]; then
   export PATH="$HOME/.pyenv/bin:$PATH"
   eval "$(pyenv init -)"
   eval "$(pyenv virtualenv-init -)"
