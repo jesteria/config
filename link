@@ -1,0 +1,36 @@
+#!/usr/bin/env python3
+import pathlib
+
+
+SOURCE_PATH = pathlib.Path(__file__).resolve()
+ROOT_PATH = SOURCE_PATH.parent
+LINKS_FILENAME = 'LINKS'
+
+
+def main(dry_run=True):
+    print('=== begin ===')
+    print('root path:', ROOT_PATH)
+    print()
+
+    print('=== activity ===')
+    instructions = []
+    for node in ROOT_PATH.iterdir():
+        if node.is_dir() and not node.name.startswith('.'):
+            links_node = node / LINKS_FILENAME
+            if links_node.exists():
+                with links_node.open() as fd:
+                    for spec in fd:
+                        (name, *instructions0) = (part.strip() for part in spec.split('|', 1))
+                        instructions.extend(instructions0)
+                        if dry_run:
+                            print('would link:', node / name)
+                        else:
+                            raise NotImplementedError
+    print()
+
+    print('=== instructions ===')
+    print(*instructions, sep='\n')
+
+
+if __name__ == '__main__':
+    main()
