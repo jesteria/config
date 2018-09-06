@@ -1,3 +1,4 @@
+.profile
 .bash_aliases
 .bash_completion
 .bashrc.inc | add a line to your .bashrc: source ~/.bashrc.inc
