@@ -77,6 +77,6 @@ if [ -d "$HOME/.pyenv/bin" ]; then
 fi
 
 # direnv
-if $(command -v direnv); then
+if $(command -v direnv &> /dev/null); then
   eval "$(direnv hook bash)"
 fi
