@@ -54,6 +54,9 @@ if [[ ! ":$PATH:" =~ :"$HOME"/.local/bin/?: ]]; then
   export PATH="$HOME/.local/bin:$PATH"
 fi
 
+if [[ ! ":$PATH:" =~ :"$HOME"/bin/?: ]]; then
+  export PATH="$HOME/bin:$PATH"
+fi
 
 #
 # Includes
@@ -61,8 +64,10 @@ fi
 
 source "$DOTFILES_ROOT"/git/path.bash.inc
 
-# . /opt/google/google-cloud-sdk/path.bash.inc
-# . /opt/google/google-cloud-sdk/completion.bash.inc
+if [ -d /opt/google/cloud ]; then
+  . /opt/google/cloud/path.bash.inc
+  . /opt/google/cloud/completion.bash.inc
+fi
 
 
 #
