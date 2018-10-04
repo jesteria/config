@@ -62,7 +62,7 @@ fi
 # Includes
 #
 
-source "$DOTFILES_ROOT"/git/path.bash.inc
+source "$DOTFILES_ROOT"/git/bashrc.inc
 
 if [ -d /opt/google/cloud ]; then
   . /opt/google/cloud/path.bash.inc
