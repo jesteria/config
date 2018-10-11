@@ -13,7 +13,6 @@ colorscheme railscasts
 filetype off
 
 call pathogen#infect()
-" call pathogen#helptags()
 
 filetype plugin indent on
 syntax on
@@ -45,12 +44,9 @@ map <leader>f :call ToggleFold()<CR>
 
 let NERDTreeIgnore = ['\.pyc$']
 
-" python-mode options
-" TODO: test
-let g:pymode_breakpoint_key = '<leader>q'
-let g:pymode_breakpoint_cmd = "import ipdb; ipdb.set_trace() ### XXX BREAKPOINT"
-let g:pymode_lint_ignore = 'E261,E127,E128,E501'
-let g:pymode_rope_always_show_complete_menu = 1
+" automatically run flake8 on save
+" FIXME: does flake8 work at all?
+autocmd BufWritePost *.py call Flake8()
 
 " Qargs
 " Populate argument list with all files in the quickfix list
