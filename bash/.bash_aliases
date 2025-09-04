@@ -23,7 +23,7 @@ function xlast {
 
 alias xopen=xdg-open
 
-alias pose='docker-compose'
+alias pose='docker compose'
 
 # for crostini
 alias crip='xclip -sel clip'
