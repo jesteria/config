@@ -38,27 +38,6 @@ function contains {
 
 
 #
-# Exports
-#
-
-export EDITOR=vim
-export GPGKEY=29D00FD4
-
-true_source=$(readlink -f "${BASH_SOURCE[0]}")
-
-export DOTFILES_ROOT=$(dirname $(dirname $true_source))
-
-unset true_source
-
-if [[ ! ":$PATH:" =~ :"$HOME"/.local/bin/?: ]]; then
-  export PATH="$HOME/.local/bin:$PATH"
-fi
-
-if [[ ! ":$PATH:" =~ :"$HOME"/bin/?: ]]; then
-  export PATH="$HOME/bin:$PATH"
-fi
-
-#
 # Includes
 #
 
@@ -75,8 +54,10 @@ fi
 #
 
 # pyenv
-if [ -d "$HOME/.pyenv/bin" ]; then
-  export PATH="$HOME/.pyenv/bin:$PATH"
+#
+# (see also: .profile)
+#
+if [ -n "$PYENV_ROOT" ] && [ -d "$PYENV_ROOT" ]; then
   eval "$(pyenv init -)"
   eval "$(pyenv virtualenv-init -)"
 fi

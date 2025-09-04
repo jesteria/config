@@ -8,18 +8,38 @@
 # for ssh logins, install and configure the libpam-umask package.
 #umask 022
 
-# if running bash
-if [ -n "$BASH_VERSION" ] && [ -f "$HOME/.bashrc" ]; then
-    # include .bashrc if it exists
-    . "$HOME/.bashrc"
-else
-    # set PATH so it includes user's private bin if it exists
-    if [ -d "$HOME/bin" ]; then
-        PATH="$HOME/bin:$PATH"
-    fi
+#
+# Exports
+#
 
-    # set PATH so it includes user's private bin if it exists
-    if [ -d "$HOME/.local/bin" ]; then
-        PATH="$HOME/.local/bin:$PATH"
-    fi
+# set PATH so it includes user's private bin if it exists
+if [ -d "$HOME/bin" ] ; then
+    export PATH="$HOME/bin:$PATH"
+fi
+
+# set PATH so it includes user's private bin if it exists
+if [ -d "$HOME/.local/bin" ] ; then
+    export PATH="$HOME/.local/bin:$PATH"
+fi
+
+# pyenv
+if [ -d "$HOME/.pyenv/bin" ]; then
+  export PYENV_ROOT="$HOME/.pyenv"
+  export PATH="$PYENV_ROOT/bin:$PATH"
+  eval "$(pyenv init --path)"
+fi
+
+export EDITOR=vim
+export GPGKEY=29D00FD4
+
+true_source=$(readlink -f "${BASH_SOURCE[0]}")
+
+export DOTFILES_ROOT=$(dirname $(dirname $true_source))
+
+unset true_source
+
+
+# if running bash & .bashrc exists: include it
+if [ -n "$BASH_VERSION" ] && [ -f "$HOME/.bashrc" ]; then
+  . "$HOME/.bashrc"
 fi
